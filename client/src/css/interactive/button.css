@@ -1,0 +1,14 @@
+.custom-button {
+    cursor: pointer;
+    border: 0px solid transparent;
+    padding: var(--size-padding);
+    border-radius: var(--size-bradius);
+    font-size: var(--size-font);
+    transition: 0.1s ease-in;
+    font-weight: 500;
+    width: 100%;
+}
+
+.custom-button:active {
+    opacity: 0.8;
+}

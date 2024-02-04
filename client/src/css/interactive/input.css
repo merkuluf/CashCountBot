@@ -1,0 +1,7 @@
+.custom-input {
+    width: 100%;
+    border-radius: var(--size-bradius);
+    border: 0px solid transparent;
+    padding: var(--size-padding);
+    font-size: var(--size-font);
+}

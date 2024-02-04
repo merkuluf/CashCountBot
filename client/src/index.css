@@ -1,0 +1,50 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Raleway', sans-serif;
+}
+
+:root {
+    --size-bradius: 8px;
+    --size-font: 1rem;
+    --size-title: 1.4rem;
+    --size-gap: 10px;
+    --size-padding: 10px;
+    --col-black: #101010;
+    --col-transparent: #8b8b8bda;
+}
+
+body {
+    background-color: var(--tg-theme-bg-color);
+    color: var(--tg-theme-text-color);
+    max-height: var(--tg-viewport-height);
+    overflow: hidden;
+}
+
+main {
+    height: var(--tg-viewport-height);
+    padding: 10px;
+}
+
+a {
+    color: var(--tg-theme-link-color);
+}
+
+.custom-text {
+    font-size: var(--size-title);
+    font-weight: 500;
+}
+
+button {
+    background-color: var(--tg-theme-button-color);
+    color: var(--tg-theme-button-text-color);
+}
+
+.center {
+    display: flex;
+    flex-direction: column;
+    gap: var(--size-gap);
+    align-items: center;
+    justify-content: center;
+}

@@ -1,0 +1,12 @@
+.custom-small-button {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    border: 0px solid transparent;
+    transition: 0.1s ease-in;
+    cursor: pointer;
+}
+
+.custom-small-button:active {
+    opacity: 0.8;
+}

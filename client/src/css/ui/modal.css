@@ -1,0 +1,49 @@
+.modal-bg {
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    transition: 0.2s ease;
+}
+
+.modal-bg-open {
+    background-color: var(--col-transparent);
+    z-index: 9;
+}
+
+.modal-bg-close {
+    background-color: transparent;
+    z-index: 0;
+}
+
+.modal-content {
+    width: 100%;
+    height: calc(var(--tg-viewport-height) - (var(--tg-viewport-height) / 10));
+    border-radius: 0px 0px 20px 20px;
+    background-color: var(--tg-theme-bg-color);
+    transition: 0.3s ease;
+}
+
+.content-open {
+    transform: translateY(0vh);
+    z-index: 19;
+}
+
+.content-close {
+    transform: translateY(-60vh);
+}
+
+.modal-close-button {
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+    z-index: 9;
+}
+
+.modal-close-button-inactive {
+    opacity: 0;
+    cursor: default;
+    user-select: none;
+    pointer-events: none;
+}
