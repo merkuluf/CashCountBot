@@ -8,31 +8,30 @@ datasource db {
 }
 
 model User {
-  id           Int           @id @default(autoincrement())
-  telegram_id  String        @unique
-  username     String
-  created_at   DateTime      @default(now())
-  updated_at   DateTime      @updatedAt
-  wallets      Wallet[]
-  transactions Transaction[]
+  id          Int      @id @default(autoincrement())
+  telegram_id String   @unique
+  username    String
+  created_at  DateTime @default(now())
+  updated_at  DateTime @updatedAt
+  wallets     Wallet[]
 }
 
 model Wallet {
-  id       Int    @id @default(autoincrement())
-  currency String
-  amount   Float  @default(0)
-  userId   Int
-  user     User   @relation(fields: [userId], references: [id])
+  id           Int           @id @default(autoincrement())
+  userId       Int
+  user         User          @relation(fields: [userId], references: [id])
+  currency     String
+  balance      Float
+  transactions Transaction[]
 }
 
 model Transaction {
-  id         Int      @id @default(autoincrement())
-  type       Boolean // false = spending, true = income
-  created_ad DateTime @default(now())
-  amount     Float
-  currency   String
-  userId     Int
-  user       User     @relation(fields: [userId], references: [id])
+  id        Int      @id @default(autoincrement())
+  walletId  Int
+  wallet    Wallet   @relation(fields: [walletId], references: [id])
+  amount    Float
+  type      Int
+  createdAt DateTime @default(now())
 }
 
 model Rates {

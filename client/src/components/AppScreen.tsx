@@ -29,17 +29,16 @@ function AppScreen() {
         WebApp.enableClosingConfirmation()
     }, [])
 
+    useEffect(() => {
+        console.log(userError)
+    }, [userError])
+
     if (isUserLoading) return <Loading />
-    if (isUserError && 'status' in userError) {
-        if (userError.status === 404)
-            return <Registration refetchUser={refetchUser} />
-        return <Message text='Произошла ошибка' />
-    }
 
     return (
         <>
             <Modal />
-            <Swiper
+            {/* <Swiper
                 modules={[Pagination]}
                 slidesPerView={1}
                 pagination={{ clickable: true }}
@@ -63,7 +62,7 @@ function AppScreen() {
                         <main>{item.element}</main>
                     </SwiperSlide>
                 ))}
-            </Swiper>
+            </Swiper> */}
         </>
     )
 }

@@ -1,16 +1,7 @@
 import { StatusCodes } from 'http-status-codes'
 import prisma from '../prisma/client.js'
 import { ApiError } from '../utils/classes/ApiError.js'
-
-export const createWallet = async (req, res, next) => {
-    try {
-        const telegram_id = req.body.telegram_id
-        const currency = req.body.currency
-        console.log(telegram_id, currency)
-    } catch (e) {
-        next(e)
-    }
-}
+import RESPONSES from '../utils/RESPONSES.js'
 
 export const registerUser = async (req, res, next) => {
     try {
@@ -25,7 +16,11 @@ export const registerUser = async (req, res, next) => {
 
         if (usernameTaken) {
             throw new ApiError(
-                `username ${username} is already taken`,
+                RESPONSES.ERROR.CREATE_RESOURCE_CONFLICT(
+                    'user',
+                    'username',
+                    username
+                ),
                 StatusCodes.CONFLICT
             )
         }
@@ -38,7 +33,11 @@ export const registerUser = async (req, res, next) => {
 
         if (telegramidTaken) {
             throw new ApiError(
-                `telegram_id ${telegram_id} is already taken`,
+                RESPONSES.ERROR.CREATE_RESOURCE_CONFLICT(
+                    'user',
+                    'telegram_id',
+                    telegram_id
+                ),
                 StatusCodes.CONFLICT
             )
         }
@@ -52,7 +51,7 @@ export const registerUser = async (req, res, next) => {
 
         if (!newUser) {
             throw new ApiError(
-                'Unable to create user, please contact support',
+                RESPONSES.ERROR.DB_ERROR('user'),
                 StatusCodes.INTERNAL_SERVER_ERROR
             )
         }
@@ -70,15 +69,15 @@ export const getUser = async (req, res, next) => {
             where: {
                 telegram_id: telegram_id,
             },
-            include: {
-                wallets: true,
-                transactions: true,
-            },
         })
 
         if (!user) {
             throw new ApiError(
-                `user with telegram_id ${telegram_id} not found`,
+                RESPONSES.ERROR.RESOURCE_NOT_FOUND(
+                    'user',
+                    'telegram_id',
+                    telegram_id
+                ),
                 StatusCodes.NOT_FOUND
             )
         }

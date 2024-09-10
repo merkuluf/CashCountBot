@@ -13,6 +13,24 @@ function recordOutdated(created_at, minutesDiff) {
     return timeDiff >= minutesInMs
 }
 
+export async function showCurrencies(req, res, next) {
+    try {
+        const recentRecord = await prisma.rates.findFirst({
+            orderBy: {
+                created_at: 'desc',
+            },
+        })
+
+        if (!recentRecord) {
+            throw new ApiError('No recent record', StatusCodes.NOT_FOUND)
+        }
+
+        return res.status(StatusCodes.OK).json(Object.keys(recentRecord.record))
+    } catch (e) {
+        next(e)
+    }
+}
+
 export async function fetchRates(req, res, next) {
     try {
         const recentRecord = await prisma.rates.findFirst({

@@ -1,14 +1,14 @@
 import express from 'express'
-import * as mw from '../middleware/validation.js'
+import * as validate from '../middleware/validation.js'
 import * as ctr from '../controllers/user.js'
-import { fetchRates } from '../controllers/services/rates.js'
+import { fetchRates, showCurrencies } from '../controllers/services/rates.js'
 const router = express.Router()
 
-router.get('/test', fetchRates)
-router.get('/user/:telegram_id', mw.validateGetUser, ctr.getUser)
+// Validation
+router.post('/validate', validate.initData)
 
-router.post('/user/wallet', mw.validateWalletCreation, ctr.createWallet)
-router.post('/user', mw.validate, ctr.registerUser)
-router.post('/validate', mw.initDataCheck)
+// Registration
+router.get('/user/:telegram_id', validate.getUser, ctr.getUser)
+router.post('/user', validate.createUser, ctr.registerUser)
 
 export default router
